@@ -1,4 +1,4 @@
-= Wagashi (和菓子)
+= Seppiko Wagashi (和菓子)
 
 :alv2: https://www.apache.org/licenses/LICENSE-2.0
 :alv2i: https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square

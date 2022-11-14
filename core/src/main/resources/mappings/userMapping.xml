@@ -1,0 +1,36 @@
+<!--
+  ~ Copyright 2022 the original author or authors.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.seppiko.wagashi.core.mappers.UserMapper">
+
+  <resultMap id="base_result" type="org.seppiko.wagashi.core.models.User">
+    <id column="id" property="id" />
+    <result column="username" property="username" />
+    <result column="password" property="password" />
+  </resultMap>
+
+  <sql id="base_table">
+    user
+  </sql>
+
+  <select id="queryByUsername" parameterType="java.lang.String" resultMap="base_result">
+    SELECT id, username, password
+    FROM <include refid="base_table" />
+    WHERE username = #{username}
+  </select>
+
+</mapper>

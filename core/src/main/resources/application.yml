@@ -1,0 +1,29 @@
+spring:
+  undertow:
+    buffer-size: 1024
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+  endpoint:
+    health:
+      show-details: always
+
+mybatis:
+  type-aliases-package: org.seppiko.wagashi.models
+  mapper-locations: classpath:mappings/*Mapping.xml
+  configuration:
+    logImpl: org.apache.ibatis.logging.slf4j.Slf4jImpl # mybatis sql log
+    mapUnderscoreToCamelCase: true
+
+# print mapper log
+logging:
+  level:
+    org.seppiko.wagashi:
+      mappers: DEBUG
