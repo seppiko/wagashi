@@ -7,7 +7,7 @@
 
   <groupId>org.seppiko</groupId>
   <artifactId>wagashi</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1.0</version>
 
   <name>Wagashi</name>
   <description>Wagashi</description>
@@ -33,6 +33,7 @@
     <spring-boot.version>2.7.5</spring-boot.version>
     <jackson-bom.version>2.14.0</jackson-bom.version>
     <snakeyaml.version>1.33</snakeyaml.version>
+    <jwt.version>4.2.1</jwt.version>
     <undertow.version>2.3.0.Final</undertow.version>
     <mybatis.boot.version>2.2.2</mybatis.boot.version>
     <p6spy.version>3.9.1</p6spy.version>
