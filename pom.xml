@@ -13,6 +13,15 @@
   <description>Wagashi</description>
   <url>https://github.com/seppiko/wagashi</url>
 
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+
   <modules>
     <module>core</module>
     <module>utils</module>
@@ -34,7 +43,6 @@
     <jackson-bom.version>2.14.0</jackson-bom.version>
     <snakeyaml.version>1.33</snakeyaml.version>
     <jwt.version>4.2.1</jwt.version>
-    <undertow.version>2.3.0.Final</undertow.version>
     <mybatis.boot.version>2.2.2</mybatis.boot.version>
     <p6spy.version>3.9.1</p6spy.version>
     <mariadb.version>3.0.8</mariadb.version>
@@ -55,34 +63,6 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring-boot.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>com.fasterxml.jackson</groupId>
-            <artifactId>jackson-bom</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>io.undertow</groupId>
-            <artifactId>undertow-core</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>io.undertow</groupId>
-            <artifactId>undertow-servlet</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>io.undertow</groupId>
-            <artifactId>undertow-websockets-jsr</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-
-      <dependency>
         <groupId>org.seppiko.wagashi</groupId>
         <artifactId>utils</artifactId>
         <version>${project.version}</version>
@@ -91,34 +71,6 @@
   </dependencyManagement>
 
   <dependencies>
-    <!-- spring-boot-dependencies update -->
-    <dependency>
-      <groupId>com.fasterxml.jackson</groupId>
-      <artifactId>jackson-bom</artifactId>
-      <version>${jackson-bom.version}</version>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>org.yaml</groupId>
-      <artifactId>snakeyaml</artifactId>
-      <version>${snakeyaml.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.undertow</groupId>
-      <artifactId>undertow-core</artifactId>
-      <version>${undertow.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.undertow</groupId>
-      <artifactId>undertow-servlet</artifactId>
-      <version>${undertow.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.undertow</groupId>
-      <artifactId>undertow-websockets-jsr</artifactId>
-      <version>${undertow.version}</version>
-    </dependency>
-
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-reflect</artifactId>
@@ -161,15 +113,6 @@
         <plugin>
           <groupId>org.jetbrains.kotlin</groupId>
           <artifactId>kotlin-maven-plugin</artifactId>
-          <executions>
-            <execution>
-              <id>compile</id>
-              <phase>compile</phase>
-              <goals>
-                <goal>compile</goal>
-              </goals>
-            </execution>
-          </executions>
           <configuration>
             <args>
               <arg>-Xjsr305=strict</arg>

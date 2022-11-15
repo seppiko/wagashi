@@ -21,8 +21,8 @@ import org.seppiko.commons.utils.Environment
 import org.seppiko.commons.utils.ObjectUtil
 import org.seppiko.commons.utils.StreamUtil
 import org.seppiko.wagashi.utils.JsonUtil
-import org.seppiko.wagashi.utils.JsonUtil.fromJsonObject
 import org.seppiko.wagashi.utils.LoggingManager
+import org.seppiko.wagashi.utils.YamlUtil
 import java.io.FileNotFoundException
 
 
@@ -38,18 +38,24 @@ object WagashiConfiguration {
 
   init {
     try {
-      val filepath = System.getProperty(Environment.CONFIG_FILE_PARAMETER_SUFFIX,
+      val filepath = System.getProperty("wagashi." + Environment.CONFIG_FILE_PARAMETER_SUFFIX,
         Environment.CONFIG_FILENAME_YAML)
       var `is` = StreamUtil.getStream(StreamUtil.findFile(this::class.java, filepath))
       if (ObjectUtil.isNull(`is`)) {
         `is` = StreamUtil.getStream(StreamUtil.findFile(this::class.java, Environment.CONFIG_FILENAME_YML))
       }
       if (ObjectUtil.isNull(`is`)) {
+        `is` = StreamUtil.getStream(Environment.CONFIG_FILENAME_YAML)
+      }
+      if (ObjectUtil.isNull(`is`)) {
+        `is` = StreamUtil.getStream(Environment.CONFIG_FILENAME_YML)
+      }
+      if (ObjectUtil.isNull(`is`)) {
         throw FileNotFoundException("config.yaml or config.yml not found")
       }
       val reader = StreamUtil.loadReader(`is`)
 
-      val root = fromJsonObject(reader)
+      val root = YamlUtil.fromYamlObject(reader)
       logger.info("Config: " + root.toString())
       loadConfig(root!!)
 
@@ -59,7 +65,7 @@ object WagashiConfiguration {
   }
 
   private fun loadConfig(root: JsonNode) {
-    this.jdbc = JsonUtil.toT(root.get(""), JdbcEntity::class.java)
+    this.jdbc = JsonUtil.toT(root.get("jdbc"), JdbcEntity::class.java)
   }
 
 }

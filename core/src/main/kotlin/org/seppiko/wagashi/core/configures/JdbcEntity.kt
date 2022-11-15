@@ -20,7 +20,7 @@ package org.seppiko.wagashi.core.configures
  *
  * @author Leonard Woo
  */
-data class JdbcEntity(val driverClassName: String,
-                      val url: String,
-                      val username: String,
-                      val password: String)
+data class JdbcEntity(var driverClassName: String?,
+                      var url: String?,
+                      var username: String?,
+                      var password: String?)

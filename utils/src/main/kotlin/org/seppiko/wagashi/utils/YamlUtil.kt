@@ -38,6 +38,8 @@ object YamlUtil {
   private val mapper = ObjectMapper(YAMLFactory())
 
   init {
+    mapper.findAndRegisterModules()
+
     mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
     mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
 
@@ -57,9 +59,9 @@ object YamlUtil {
     try {
       return mapper.writeValueAsString(t)
     } catch (e: JsonProcessingException) {
-      logger.warn("Json string generator exception.", e)
+      logger.warn("Yaml string generator exception.", e)
     }
-    return "{}"
+    return ""
   }
 
   fun <T> fromYaml(yaml: String?, type: Class<T>): T? {
@@ -69,7 +71,7 @@ object YamlUtil {
     try {
       return mapper.readValue(yaml, type)
     } catch (e: JsonProcessingException) {
-      logger.warn("Json string parse exception. " + e.message)
+      logger.warn("Yaml string parse exception. " + e.message)
     }
     return null
   }
@@ -85,7 +87,7 @@ object YamlUtil {
     try {
       return mapper.reader().readTree(yaml)
     } catch (e: IOException) {
-      logger.warn("Json parse exception.", e)
+      logger.warn("Yaml parse exception.", e)
     }
     return JsonUtil.NULL_JSON_NODE
   }

@@ -21,6 +21,7 @@ import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.paranamer.ParanamerModule
 import org.seppiko.commons.utils.ObjectUtil
 import org.seppiko.commons.utils.StringUtil
 import java.io.IOException
@@ -39,6 +40,8 @@ object JsonUtil {
   var NULL_JSON_NODE: JsonNode?
 
   init {
+    mapper.registerModule(ParanamerModule())
+
     mapper.setSerializationInclusion(Include.NON_NULL)
     mapper.setSerializationInclusion(Include.NON_EMPTY)
 
