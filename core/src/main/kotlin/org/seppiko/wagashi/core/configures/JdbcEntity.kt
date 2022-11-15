@@ -16,13 +16,11 @@
 
 package org.seppiko.wagashi.core.configures
 
-import com.fasterxml.jackson.annotation.JsonProperty
-
 /**
  *
  * @author Leonard Woo
  */
-data class JdbcEntity(@JsonProperty("driver_class_name") val driverClassName: String,
-                      @JsonProperty("url") val url: String,
-                      @JsonProperty("username") val username: String,
-                      @JsonProperty("password") val password: String)
+data class JdbcEntity(val driverClassName: String,
+                      val url: String,
+                      val username: String,
+                      val password: String)

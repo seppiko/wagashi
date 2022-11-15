@@ -27,6 +27,7 @@ import java.nio.charset.StandardCharsets
  * @author Leonard Woo
  */
 object ResponseUtil {
+
   fun <T> sendJson(status: Int, t: T): ResponseEntity<ByteArray?>? {
     return sendJson(HttpStatus.valueOf(status), t)
   }

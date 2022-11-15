@@ -49,7 +49,7 @@ class IndexController {
 
     val modelAndView = ModelAndView()
     modelAndView.view = MappingJackson2JsonView()
-    modelAndView.status = HttpStatus.BAD_REQUEST
+    modelAndView.status = HttpStatus.OK
     modelAndView.addObject("code", 400)
     modelAndView.addObject("message", "Bad request")
     return modelAndView

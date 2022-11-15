@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.seppiko.wagashi.core
+package org.seppiko.wagashi
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

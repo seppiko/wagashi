@@ -29,15 +29,15 @@ import javax.sql.DataSource
 @Configuration
 class DatasourceConfiguration {
 
-  private val jdbc: JdbcEntity? = null
+  private val jdbc: JdbcEntity = WagashiConfiguration.jdbc!!
 
   @Bean
   fun getDatasource(): DataSource? {
     val dataSource = HikariDataSource()
-    dataSource.driverClassName = jdbc!!.driverClassName
-    dataSource.jdbcUrl = jdbc!!.url
-    dataSource.username = jdbc!!.username
-    dataSource.password = jdbc!!.password
+    dataSource.driverClassName = jdbc.driverClassName
+    dataSource.jdbcUrl = jdbc.url
+    dataSource.username = jdbc.username
+    dataSource.password = jdbc.password
     return dataSource
   }
 }
