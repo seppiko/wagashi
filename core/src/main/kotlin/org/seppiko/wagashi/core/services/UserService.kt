@@ -30,11 +30,11 @@ import org.springframework.stereotype.Service
 class UserService : UserDetailsService {
 
   @Autowired
-  private val mapper: UserMapper? = null
+  private lateinit var mapper: UserMapper
 
   @Throws(UsernameNotFoundException::class)
   override fun loadUserByUsername(username: String): UserDetails {
-    val user: User? = mapper!!.queryByUsername(username)
+    val user: User? = mapper.queryByUsername(username)
     return UserPrincipal(user)
   }
 

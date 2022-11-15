@@ -17,12 +17,24 @@
 package org.seppiko.wagashi.core.controllers
 
 import org.seppiko.wagashi.core.models.ResponseMessage
+import org.seppiko.wagashi.core.services.UserService
 import org.seppiko.wagashi.core.utils.ResponseUtil.sendJson
+import org.seppiko.wagashi.utils.JsonUtil
+import org.seppiko.wagashi.utils.JwtUtil
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseCookie
 import org.springframework.http.ResponseEntity
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
+import java.util.stream.Collectors
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
+
 
 /**
  *
@@ -31,11 +43,38 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class AccountController {
 
+  @Autowired
+  private lateinit var service: UserService
+
+
   @RequestMapping(value = ["/login"], method = [RequestMethod.POST])
   fun ContentHandleExecution(
     @RequestBody(required = false) requestBody: String?
   ): ResponseEntity<ByteArray?>? {
-    return sendJson(200, ResponseMessage<Any>(200, "ok"))
+
+    if (requestBody.isNullOrBlank()) {
+      return sendJson(400, ResponseMessage<Any>(400, "failure"))
+    }
+
+    val login = JsonUtil.fromJsonObject(requestBody)
+    val user = service.loadUserByUsername(login!!.get("username").asText())
+    if (!login!!.get("password").asText().equals(user.password)) {
+      return sendJson(200, ResponseMessage<Any>(401, "failure"))
+    }
+
+    val jwt = JwtUtil.generator(user.username)
+
+    val roles: List<String> = user.authorities.stream()
+      .map { item -> item.authority }
+      .collect(Collectors.toList())
+
+    val map = mapOf(
+      "access_token" to jwt,
+      "token_type" to "Bearer",
+      "expires_in" to 3600,
+    )
+
+    return sendJson(200, ResponseMessage<Any>(200, "ok", map))
   }
 
 }

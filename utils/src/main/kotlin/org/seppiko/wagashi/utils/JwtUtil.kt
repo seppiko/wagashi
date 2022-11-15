@@ -20,18 +20,26 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTCreationException
 import com.auth0.jwt.exceptions.JWTVerificationException
+import java.time.Clock
+import java.time.Instant
 
 /**
  *
  * @author Leonard Woo
  */
 object JwtUtil {
- private val algorithm = Algorithm.HMAC256("")
 
- fun generator(): String? {
+ private val algorithm = Algorithm.HMAC256("")
+ private val issuer = ""
+
+ fun generator(username: String): String? {
+  val now = Instant.now(Clock.systemUTC())
   return try {
    JWT.create()
-    .withIssuer("")
+    .withIssuer(issuer)
+    .withIssuedAt(now)
+    .withExpiresAt(now.plusMillis(3600))
+    .withSubject(username)
     .sign(algorithm)
   } catch (exception: JWTCreationException) {
    // Invalid Signing configuration / Couldn't convert Claims.
@@ -41,7 +49,9 @@ object JwtUtil {
 
  fun verify(token: String?): Boolean {
   return try {
-   val verifier = JWT.require(algorithm).build()
+   val verifier = JWT.require(algorithm)
+    .withIssuer(issuer)
+    .build()
    val decodedJWT = verifier.verify(token)
    !decodedJWT.payload.equals("")
   } catch (exception: JWTVerificationException) {
