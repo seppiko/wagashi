@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package org.seppiko.wagashi.utils
+package org.seppiko.wagashi.core.utils
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTCreationException
 import com.auth0.jwt.exceptions.JWTVerificationException
+import org.seppiko.wagashi.core.configures.WagashiConfiguration
 import java.time.Clock
 import java.time.Instant
 
@@ -29,8 +30,9 @@ import java.time.Instant
  */
 object JwtUtil {
 
- private val algorithm = Algorithm.HMAC256("")
- private val issuer = ""
+ private val jwt = WagashiConfiguration.jwt!!
+ private val algorithm = Algorithm.HMAC256(jwt.secret)
+ private val issuer = jwt.issuer
 
  fun generator(username: String): String? {
   val now = Instant.now(Clock.systemUTC())

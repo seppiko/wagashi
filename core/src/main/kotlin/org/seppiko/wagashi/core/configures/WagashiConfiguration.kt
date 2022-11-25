@@ -36,20 +36,23 @@ object WagashiConfiguration {
 
   var jdbc: JdbcEntity? = null
 
+  var jwt: JwtEntity? = null
+
   init {
     try {
       val filepath = System.getProperty("wagashi." + Environment.CONFIG_FILE_PARAMETER_SUFFIX,
         Environment.CONFIG_FILENAME_YAML)
-      var `is` = StreamUtil.getStream(StreamUtil.findFile(this::class.java, filepath))
-      if (ObjectUtil.isNull(`is`)) {
-        `is` = StreamUtil.getStream(StreamUtil.findFile(this::class.java, Environment.CONFIG_FILENAME_YML))
-      }
-      if (ObjectUtil.isNull(`is`)) {
-        `is` = StreamUtil.getStream(Environment.CONFIG_FILENAME_YAML)
-      }
+      var `is` = StreamUtil.getStream(filepath)
       if (ObjectUtil.isNull(`is`)) {
         `is` = StreamUtil.getStream(Environment.CONFIG_FILENAME_YML)
       }
+      if (ObjectUtil.isNull(`is`)) {
+        `is` = StreamUtil.getStream(StreamUtil.findFile(this::class.java, Environment.CONFIG_FILENAME_YAML))
+      }
+      if (ObjectUtil.isNull(`is`)) {
+        `is` = StreamUtil.getStream(StreamUtil.findFile(this::class.java, Environment.CONFIG_FILENAME_YML))
+      }
+
       if (ObjectUtil.isNull(`is`)) {
         throw FileNotFoundException("config.yaml or config.yml not found")
       }
@@ -66,6 +69,7 @@ object WagashiConfiguration {
 
   private fun loadConfig(root: JsonNode) {
     this.jdbc = JsonUtil.toT(root.get("jdbc"), JdbcEntity::class.java)
+    this.jwt = JsonUtil.toT(root.get("jwt"), JwtEntity::class.java)
   }
 
 }

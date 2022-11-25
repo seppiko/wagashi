@@ -16,7 +16,7 @@
 
 package org.seppiko.wagashi.utils
 
-import org.seppiko.commons.logging.AbstractLogging
+import org.seppiko.commons.logging.ILogging
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory
  *
  * @author Leonard Woo
  */
-class LoggingManager(private var logger: Logger?) : AbstractLogging {
+class LoggingManager(private var logger: Logger?) : ILogging {
 
   companion object {
     fun getLogger(clazz: Class<*>): LoggingManager? {

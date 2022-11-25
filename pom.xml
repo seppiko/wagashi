@@ -37,27 +37,26 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
 
+    <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+
     <kotlin.version>1.7.21</kotlin.version>
 
-    <spring-boot.version>2.7.5</spring-boot.version>
-    <jackson-bom.version>2.14.0</jackson-bom.version>
-    <snakeyaml.version>1.33</snakeyaml.version>
+    <spring-boot.version>3.0.0</spring-boot.version>
     <jwt.version>4.2.1</jwt.version>
     <mybatis.boot.version>2.2.2</mybatis.boot.version>
     <p6spy.version>3.9.1</p6spy.version>
     <mariadb.version>3.0.8</mariadb.version>
     <maven-model.version>3.8.6</maven-model.version>
 
-    <seppiko-commons-util.version>2.5.0</seppiko-commons-util.version>
-    <seppiko-commons-logging.version>1.2.0.RELEASE</seppiko-commons-logging.version>
-
-    <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+    <seppiko-commons-util.version>2.6.1</seppiko-commons-util.version>
+    <seppiko-commons-logging.version>2.0.0</seppiko-commons-logging.version>
   </properties>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.5</version>
+    <version>3.0.0</version>
+    <relativePath/>
   </parent>
 
   <dependencyManagement>
@@ -121,6 +120,15 @@
               <plugin>spring</plugin>
             </compilerPlugins>
           </configuration>
+          <executions>
+            <execution>
+              <id>compile</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>compile</goal>
+              </goals>
+            </execution>
+          </executions>
           <dependencies>
             <dependency>
               <groupId>org.jetbrains.kotlin</groupId>

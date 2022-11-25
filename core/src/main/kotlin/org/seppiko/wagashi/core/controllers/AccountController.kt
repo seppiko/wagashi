@@ -20,20 +20,14 @@ import org.seppiko.wagashi.core.models.ResponseMessage
 import org.seppiko.wagashi.core.services.UserService
 import org.seppiko.wagashi.core.utils.ResponseUtil.sendJson
 import org.seppiko.wagashi.utils.JsonUtil
-import org.seppiko.wagashi.utils.JwtUtil
+import org.seppiko.wagashi.core.utils.JwtUtil
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.ResponseCookie
 import org.springframework.http.ResponseEntity
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import java.util.stream.Collectors
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 
 /**

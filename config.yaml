@@ -3,3 +3,7 @@ jdbc:
   url: "jdbc:p6spy:mariadb://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8"
   username: ""
   password: ""
+
+jwt:
+  secret: "seppiko-wagashi"
+  issuer: "Wagashi"
