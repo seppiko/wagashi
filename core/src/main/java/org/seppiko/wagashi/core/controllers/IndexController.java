@@ -1,0 +1,57 @@
+/*
+ * Copyright 2022 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.seppiko.wagashi.core.controllers;
+
+import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
+import org.seppiko.wagashi.commons.utils.JsonUtil;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
+/**
+ * @author Leonard Woo
+ */
+@Slf4j
+@RestController
+public class IndexController {
+
+  @RequestMapping(value = "/")
+  public ModelAndView indexContentHandleExecution(
+      @RequestParam(required = false) Map<String, String> params,
+      @RequestBody(required = false) String requestBody) {
+
+    if (null != params && !params.isEmpty()) {
+      log.info(JsonUtil.toJson(params));
+    }
+    if (requestBody != null) {
+      log.info(requestBody);
+    }
+
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setView(new MappingJackson2JsonView());
+    modelAndView.setStatus(HttpStatus.OK);
+    modelAndView.addObject("code", 400);
+    modelAndView.addObject("message", "Bad request");
+    return modelAndView;
+  }
+
+}

@@ -16,7 +16,7 @@ management:
       show-details: always
 
 mybatis:
-  type-aliases-package: org.seppiko.wagashi.models
+  type-aliases-package: org.seppiko.wagashi.core.models
   mapper-locations: classpath:mappings/*Mapping.xml
   configuration:
     logImpl: org.apache.ibatis.logging.slf4j.Slf4jImpl # mybatis sql log

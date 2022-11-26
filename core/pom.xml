@@ -13,7 +13,7 @@
   <artifactId>core</artifactId>
 
   <properties>
-
+    <starter.class>org.seppiko.wagashi.WagashiApplication</starter.class>
   </properties>
 
   <dependencies>
@@ -51,6 +51,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-log4j2</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-web</artifactId>
@@ -59,12 +60,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.auth0</groupId>
-      <artifactId>java-jwt</artifactId>
-      <version>${jwt.version}</version>
     </dependency>
 
     <dependency>
@@ -98,14 +93,12 @@
 
     <dependency>
       <groupId>org.seppiko.wagashi</groupId>
-      <artifactId>utils</artifactId>
+      <artifactId>commons</artifactId>
     </dependency>
 
   </dependencies>
 
   <build>
-    <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-    <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
     <finalName>wagashi</finalName>
 
     <plugins>
@@ -121,6 +114,7 @@
               <artifactId>${project.artifactId}</artifactId>
             </include>
           </includes>
+          <mainClass>${starter.class}</mainClass>
         </configuration>
         <executions>
           <execution>
@@ -129,11 +123,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-maven-plugin</artifactId>
       </plugin>
 
       <plugin>
