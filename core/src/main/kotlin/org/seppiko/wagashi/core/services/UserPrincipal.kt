@@ -36,10 +36,10 @@ class UserPrincipal(user: User?, roles: List<Role?>) : UserDetails {
     val authList: ArrayList<GrantedAuthority?> = ArrayList();
     for (role: Role? in roles) {
       if (role != null) {
-        authList.add(GrantedAuthority { role.name })
+        authList.add(RolePrincipal(role))
       }
     }
-    return authList;
+    return authList
   }
 
   override fun getPassword(): String? {

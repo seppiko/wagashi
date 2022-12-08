@@ -52,7 +52,7 @@ class WebSecurityConfigure {
       requests
         // authorization-free url
         .requestMatchers("/", "/settings").permitAll()
-        .anyRequest().anonymous()
+        .anyRequest().authenticated()
     }
       .formLogin { form: FormLoginConfigurer<HttpSecurity?> -> form.loginPage("/login").permitAll() } // login/sign in
       .logout { logout: LogoutConfigurer<HttpSecurity?> ->
