@@ -24,6 +24,5 @@ import org.seppiko.wagashi.core.models.User;
  */
 @Mapper
 public interface UserMapper {
-
   User queryByUsername(String username);
 }

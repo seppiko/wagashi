@@ -10,5 +10,5 @@ import java.util.List;
  */
 @Mapper
 public interface RoleMapper {
-  List<Role> queryByUserID(Long id);
+  List<Role> queryByUserID(Long uid);
 }
