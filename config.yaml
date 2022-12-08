@@ -7,4 +7,3 @@ jdbc:
 jwt:
   secret: "seppiko-wagashi"
   issuer: "Wagashi"
-  expires: 3600
