@@ -21,7 +21,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.module.paranamer.ParanamerModule;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
@@ -43,8 +42,6 @@ public class JsonUtil {
   public static final JsonNode NULL_JSONNODE;
 
   static {
-    mapper.registerModule(new ParanamerModule());
-
     mapper.setSerializationInclusion(Include.NON_NULL);
     mapper.setSerializationInclusion(Include.NON_EMPTY);
 

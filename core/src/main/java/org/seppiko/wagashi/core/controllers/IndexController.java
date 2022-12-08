@@ -20,11 +20,11 @@ import java.util.Map;
 import org.seppiko.commons.logging.Logging;
 import org.seppiko.commons.logging.LoggingFactory;
 import org.seppiko.wagashi.commons.utils.JsonUtil;
+import org.seppiko.wagashi.core.models.ResponseMessageEntity;
+import org.seppiko.wagashi.core.utils.ResponseUtil;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -54,6 +54,11 @@ public class IndexController {
     modelAndView.addObject("code", 400);
     modelAndView.addObject("message", "Bad request");
     return modelAndView;
+  }
+
+  @RequestMapping(value = "/settings", method = RequestMethod.GET)
+  public ResponseEntity<byte[]> indexContentHandleExecution() {
+    return ResponseUtil.sendJson(200, new ResponseMessageEntity<>(200, "ok"));
   }
 
 }

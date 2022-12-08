@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UndertowConfigure implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
-  @Value("${spring.undertow.buffer-size}")
+  @Value("${server.undertow.buffer-size}")
   private int bufferSize;
 
   @Override

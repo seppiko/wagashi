@@ -25,6 +25,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Spring boot security config
@@ -39,7 +40,7 @@ public class WebSecurityConfigure {
   @Order(1)
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests((requests) -> requests
-            .requestMatchers("/", "/settings").anonymous() // authorization-free url
+            .requestMatchers(new AntPathRequestMatcher("/", "/settings")).permitAll() // authorization-free url
             .anyRequest().authenticated())
         .formLogin((form) -> form.loginPage("/login").permitAll()) // login/sign in
         .logout((logout) -> logout.logoutSuccessUrl("/").permitAll()) // logout/sign out

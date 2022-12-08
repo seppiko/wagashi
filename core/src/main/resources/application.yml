@@ -1,4 +1,4 @@
-spring:
+server:
   undertow:
     buffer-size: 1024
 
@@ -26,4 +26,6 @@ mybatis:
 logging:
   level:
     org.seppiko.wagashi.core:
+      controllers: INFO
       mappers: DEBUG
+      services: INFO

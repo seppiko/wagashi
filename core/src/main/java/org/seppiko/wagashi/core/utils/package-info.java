@@ -1,0 +1,1 @@
+package org.seppiko.wagashi.core.utils;

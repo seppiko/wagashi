@@ -31,6 +31,6 @@ public class WagashiCommonsTest {
   @Test
   public void configTest() {
     System.out.println(WagashiConfigure.getInstance());
-    System.out.println(JwtUtil.jwtGenerator("2234"));
+    System.out.println(JwtUtil.jwtGenerator("admin"));
   }
 }

@@ -28,4 +28,5 @@ public class WagashiApplication {
   public static void main(String[] args) {
     SpringApplication.run(WagashiApplication.class, args);
   }
+
 }
