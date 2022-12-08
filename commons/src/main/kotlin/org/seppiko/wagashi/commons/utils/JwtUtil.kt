@@ -31,10 +31,18 @@ import java.time.Instant
 object JwtUtil {
 
  private val jwt = WagashiConfiguration.jwt!!
- private val algorithm = Algorithm.HMAC256(jwt.secret)
- private val issuer = jwt.issuer
+ private var algorithm = Algorithm.HMAC256(jwt.secret)
+ private var issuer = jwt.issuer
 
- fun generator(username: String): String? {
+ fun setAlgorithm(secret: String) {
+  algorithm = Algorithm.HMAC256(secret)
+ }
+
+ fun setIssuer(issuer: String) {
+  this.issuer = issuer
+ }
+
+ fun generator(username: String): String {
   val now = Instant.now(Clock.systemUTC())
   return try {
    JWT.create()

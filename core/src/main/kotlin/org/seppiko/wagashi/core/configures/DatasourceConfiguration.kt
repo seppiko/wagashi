@@ -34,7 +34,7 @@ class DatasourceConfiguration {
   private val jdbc: JdbcEntity = WagashiConfiguration.jdbc!!
 
   @Bean
-  fun getDatasource(): DataSource? {
+  fun getDatasource(): DataSource {
     val dataSource = HikariDataSource()
     dataSource.driverClassName = jdbc.driverClassName
     dataSource.jdbcUrl = jdbc.url

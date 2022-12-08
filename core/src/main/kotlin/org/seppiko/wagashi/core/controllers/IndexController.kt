@@ -19,13 +19,14 @@ package org.seppiko.wagashi.core.controllers
 import org.seppiko.commons.logging.Logging
 import org.seppiko.commons.logging.LoggingFactory
 import org.seppiko.wagashi.commons.utils.JsonUtil
+import org.seppiko.wagashi.core.models.ResponseMessage
+import org.seppiko.wagashi.core.utils.ResponseUtil
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 /**
  *
@@ -54,5 +55,10 @@ class IndexController {
     modelAndView.addObject("code", 400)
     modelAndView.addObject("message", "Bad request")
     return modelAndView
+  }
+
+  @RequestMapping(value = ["/settings"], method = [RequestMethod.GET, RequestMethod.OPTIONS])
+  fun settingsContentHandleExecution(): ResponseEntity<ByteArray?>? {
+    return ResponseUtil.sendJson(200, ResponseMessage<JvmType.Object>(200, "ok"))
   }
 }

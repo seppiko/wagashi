@@ -26,4 +26,5 @@ mybatis:
 logging:
   level:
     org.seppiko.wagashi:
-      mappers: DEBUG
+      core:
+        mappers: DEBUG

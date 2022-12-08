@@ -23,10 +23,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.RememberMeServices
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices.RememberMeTokenAlgorithm
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository
+
 
 /**
  * Spring boot security config
@@ -42,15 +47,18 @@ class WebSecurityConfigure {
     Exception::class
   )
   fun securityFilterChain(http: HttpSecurity): SecurityFilterChain? {
-    http.authorizeHttpRequests { requests ->
+    http
+      .authorizeHttpRequests { requests ->
       requests
-        .requestMatchers("/", "/settings").permitAll() // authorization-free url
-        .anyRequest().authenticated()
+        // authorization-free url
+        .requestMatchers("/", "/settings").permitAll()
+        .anyRequest().anonymous()
     }
       .formLogin { form: FormLoginConfigurer<HttpSecurity?> -> form.loginPage("/login").permitAll() } // login/sign in
       .logout { logout: LogoutConfigurer<HttpSecurity?> ->
         logout.logoutSuccessUrl("/").permitAll() } // logout/sign out
-    //            .rememberMe().rememberMeParameter("rememberMe")
+//                .rememberMe(rememberMeServices(rememberMeServices))
+    ;
     return http.build()
   }
 
@@ -72,4 +80,11 @@ class WebSecurityConfigure {
     return BCryptPasswordEncoder()
   }
 
+//  @Bean
+//  fun rememberMeServices(userDetailsService: UserDetailsService?): RememberMeServices {
+//    val encodingAlgorithm = RememberMeTokenAlgorithm.SHA256
+//    val rememberMe = TokenBasedRememberMeServices("wagashi-rm", userDetailsService, encodingAlgorithm)
+//    rememberMe.setMatchingAlgorithm(RememberMeTokenAlgorithm.SHA256)
+//    return rememberMe
+//  }
 }
