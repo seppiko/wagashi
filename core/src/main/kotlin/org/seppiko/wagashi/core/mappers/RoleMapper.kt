@@ -14,12 +14,18 @@
  * limitations under the License.
  */
 
-package org.seppiko.wagashi.core.models
+package org.seppiko.wagashi.core.mappers
+
+import org.apache.ibatis.annotations.Mapper
+import org.seppiko.wagashi.core.models.Role
 
 /**
  *
  * @author Leonard Woo
  */
-data class User(val id: Long?,
-                val username: String?,
-                val password: String?)
+@Mapper
+interface RoleMapper {
+
+  fun queryByUserID(uid: Long?): List<Role?>
+
+}

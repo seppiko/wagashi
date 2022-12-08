@@ -15,6 +15,7 @@
  */
 package org.seppiko.wagashi.core.services
 
+import org.seppiko.wagashi.core.models.Role
 import org.seppiko.wagashi.core.models.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -22,15 +23,23 @@ import org.springframework.security.core.userdetails.UserDetails
 /**
  * @author Leonard Woo
  */
-class UserPrincipal(user: User?) : UserDetails {
+class UserPrincipal(user: User?, roles: List<Role?>) : UserDetails {
   private val user: User?
+  private val roles: List<Role?>
 
   init {
     this.user = user
+    this.roles = roles
   }
 
   override fun getAuthorities(): Collection<GrantedAuthority?>? {
-    return null
+    val authList: ArrayList<GrantedAuthority?> = ArrayList();
+    for (role: Role? in roles) {
+      if (role != null) {
+        authList.add(GrantedAuthority { role.name })
+      }
+    }
+    return authList;
   }
 
   override fun getPassword(): String? {

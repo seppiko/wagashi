@@ -15,7 +15,9 @@
  */
 package org.seppiko.wagashi.core.services
 
+import org.seppiko.wagashi.core.mappers.RoleMapper
 import org.seppiko.wagashi.core.mappers.UserMapper
+import org.seppiko.wagashi.core.models.Role
 import org.seppiko.wagashi.core.models.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails
@@ -30,12 +32,16 @@ import org.springframework.stereotype.Service
 class UserService : UserDetailsService {
 
   @Autowired
-  private lateinit var mapper: UserMapper
+  private lateinit var umapper: UserMapper
+
+  @Autowired
+  private lateinit var rmapper: RoleMapper
 
   @Throws(UsernameNotFoundException::class)
   override fun loadUserByUsername(username: String): UserDetails {
-    val user: User? = mapper.queryByUsername(username)
-    return UserPrincipal(user)
+    val user: User? = umapper.queryByUsername(username)
+    var roles: List<Role?> = rmapper.queryByUserID(user!!.id)
+    return UserPrincipal(user, roles)
   }
 
 }

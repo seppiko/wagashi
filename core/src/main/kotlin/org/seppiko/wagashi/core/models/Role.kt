@@ -20,6 +20,5 @@ package org.seppiko.wagashi.core.models
  *
  * @author Leonard Woo
  */
-data class User(val id: Long?,
-                val username: String?,
-                val password: String?)
+data class Role(val id: Int?,
+                val name: String?)
