@@ -13,6 +13,7 @@
   <artifactId>commons</artifactId>
 
   <properties>
+    <scl-over-slf4j.version>0.1.1</scl-over-slf4j.version>
   </properties>
 
   <dependencies>
@@ -48,11 +49,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>com.auth0</groupId>
       <artifactId>java-jwt</artifactId>
       <version>${jwt.version}</version>
@@ -64,14 +60,21 @@
       <version>${seppiko-commons-util.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.seppiko.commons</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>${seppiko-commons-logging.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seppiko.logging</groupId>
+      <artifactId>scl-over-slf4j</artifactId>
+      <version>${scl-over-slf4j.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-maven-plugin</artifactId>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>

@@ -20,7 +20,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import lombok.extern.slf4j.Slf4j;
+import org.seppiko.commons.logging.Logging;
+import org.seppiko.commons.logging.LoggingFactory;
 import org.seppiko.commons.utils.Environment;
 import org.seppiko.commons.utils.StreamUtil;
 import org.seppiko.wagashi.commons.models.JdbcEntity;
@@ -31,13 +32,14 @@ import org.seppiko.wagashi.commons.utils.YamlUtil;
 /**
  * @author Leonard Woo
  */
-@Slf4j
 public class WagashiConfigure {
 
   private static final WagashiConfigure INSTANCE = new WagashiConfigure();
   public static WagashiConfigure getInstance() {
     return INSTANCE;
   }
+
+  private final Logging log = LoggingFactory.getLogging(this.getClass());
 
   private WagashiConfigure() {
     init();
@@ -80,7 +82,7 @@ public class WagashiConfigure {
       loadConfig(root);
 
     } catch (Throwable cause) {
-      log.atError().setCause(cause).log();
+      log.atError().withCause(cause).log();
     }
   }
 

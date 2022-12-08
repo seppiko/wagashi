@@ -39,7 +39,7 @@ public class WebSecurityConfigure {
   @Order(1)
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests((requests) -> requests
-            .requestMatchers("/", "/settings").permitAll() // authorization-free url
+            .requestMatchers("/", "/settings").anonymous() // authorization-free url
             .anyRequest().authenticated())
         .formLogin((form) -> form.loginPage("/login").permitAll()) // login/sign in
         .logout((logout) -> logout.logoutSuccessUrl("/").permitAll()) // logout/sign out

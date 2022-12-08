@@ -18,7 +18,8 @@ package org.seppiko.wagashi.core.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
+import org.seppiko.commons.logging.Logging;
+import org.seppiko.commons.logging.LoggingFactory;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorViewResolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,9 +29,10 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 /**
  * @author Leonard Woo
  */
-@Slf4j
 @RestController
 public class ErrorController implements ErrorViewResolver {
+
+  private final Logging log = LoggingFactory.getLogging(this.getClass());
 
   @Override
   public ModelAndView resolveErrorView(HttpServletRequest request, HttpStatus status,

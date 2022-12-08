@@ -17,7 +17,8 @@
 package org.seppiko.wagashi.core.controllers;
 
 import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
+import org.seppiko.commons.logging.Logging;
+import org.seppiko.commons.logging.LoggingFactory;
 import org.seppiko.wagashi.commons.utils.JsonUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,9 +31,10 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 /**
  * @author Leonard Woo
  */
-@Slf4j
 @RestController
 public class IndexController {
+
+  private final Logging log = LoggingFactory.getLogging(this.getClass());
 
   @RequestMapping(value = "/")
   public ModelAndView indexContentHandleExecution(

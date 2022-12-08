@@ -25,7 +25,8 @@ import com.fasterxml.jackson.module.paranamer.ParanamerModule;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import lombok.extern.slf4j.Slf4j;
+import org.seppiko.commons.logging.Logging;
+import org.seppiko.commons.logging.LoggingFactory;
 import org.seppiko.commons.utils.ObjectUtil;
 
 /**
@@ -33,8 +34,9 @@ import org.seppiko.commons.utils.ObjectUtil;
  *
  * @author Leonard Woo
  */
-@Slf4j
 public class JsonUtil {
+
+  private static final Logging log = LoggingFactory.getLogging(JsonUtil.class);
 
   private static final ObjectMapper mapper = new ObjectMapper();
 

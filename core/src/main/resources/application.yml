@@ -25,5 +25,5 @@ mybatis:
 # print mapper log
 logging:
   level:
-    org.seppiko.wagashi:
+    org.seppiko.wagashi.core:
       mappers: DEBUG
