@@ -17,12 +17,12 @@
 package org.seppiko.wagashi;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Leonard Woo
  */
-@SpringBootConfiguration
+@SpringBootApplication
 public class WagashiApplication {
 
   public static void main(String[] args) {

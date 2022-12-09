@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
  * @author Leonard Woo
  */
 @Component
-public class UndertowConfigure implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
+public class WebServerFactoryConfigure implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
   @Value("${server.undertow.buffer-size}")
   private int bufferSize;

@@ -57,7 +57,7 @@ public class IndexController {
   }
 
   @RequestMapping(value = "/settings", method = RequestMethod.GET)
-  public ResponseEntity<byte[]> indexContentHandleExecution() {
+  public ResponseEntity<byte[]> settingsContentHandleExecution() {
     return ResponseUtil.sendJson(200, new ResponseMessageEntity<>(200, "ok"));
   }
 

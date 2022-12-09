@@ -44,6 +44,10 @@ public class JwtUtil {
     expires = config.expires() == null? 3600: config.expires();
   }
 
+  public static Integer getExpires() {
+    return expires;
+  }
+
   public static String jwtGenerator(String username) throws IllegalCallerException {
     try {
       Instant now = Instant.now(Clock.systemUTC());

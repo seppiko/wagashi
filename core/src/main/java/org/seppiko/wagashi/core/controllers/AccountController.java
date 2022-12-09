@@ -32,15 +32,24 @@ public class AccountController {
     }
 
     var login = JsonUtil.fromJsonObject(requestBody);
+    if (login.isEmpty()) {
+      return ResponseUtil.sendJson(200, new ResponseMessageEntity<>(400, "failure"));
+    }
+
     UserDetails userDetails = service.loadUserByUsername(login.get("username").asText());
     if (!login.get("password").asText().equals(userDetails.getPassword())) {
       return ResponseUtil.sendJson(200, new ResponseMessageEntity<>(401, "failure"));
     }
 
     String jwt = JwtUtil.jwtGenerator(userDetails.getUsername());
-    ResponseTokenEntity respToken = new ResponseTokenEntity(jwt,3600L);
+    ResponseTokenEntity respToken = new ResponseTokenEntity(jwt, JwtUtil.getExpires());
 
     return ResponseUtil.sendJson(200, new ResponseMessageEntity<>(200, "ok", respToken));
+  }
+
+  @RequestMapping(value = "/logout")
+  public ResponseEntity<byte[]> logoutContentHandleExecution() {
+    return ResponseUtil.sendJson(200, new ResponseMessageEntity<>(200, "ok"));
   }
 
 }
