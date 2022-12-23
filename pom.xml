@@ -23,8 +23,8 @@
   </licenses>
 
   <modules>
-    <module>core</module>
     <module>commons</module>
+    <module>core</module>
   </modules>
 
   <properties>
@@ -38,9 +38,8 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
 
     <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
-    <spring-boot.version>3.0.0</spring-boot.version>
     <jwt.version>4.2.1</jwt.version>
-    <mybatis.boot.version>3.0.0</mybatis.boot.version>
+    <mybatis.boot.version>3.0.1</mybatis.boot.version>
     <p6spy.version>3.9.1</p6spy.version>
     <mariadb.version>3.0.8</mariadb.version>
     <maven-model.version>3.8.6</maven-model.version>
@@ -52,7 +51,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
   </parent>
 
   <dependencyManagement>

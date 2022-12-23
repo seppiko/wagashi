@@ -28,4 +28,4 @@ logging:
     org.seppiko.wagashi.core:
       controllers: INFO
       mappers: DEBUG
-      services: INFO
+      services: DEBUG

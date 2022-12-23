@@ -34,6 +34,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.ArrayList;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 /**
  * Spring boot security config
  *
@@ -54,14 +56,17 @@ public class WebSecurityConfigure {
     http.authorizeHttpRequests((requests) -> requests
                     .requestMatchers(antRequestMatcherList.toArray(AntPathRequestMatcher[]::new)).permitAll()
                     .anyRequest().authenticated())
-            .formLogin((form) -> form.loginPage("/login").permitAll()) // login/sign in
+//            .formLogin((form) -> form
+//                    .loginPage("/login")
+//                    .permitAll()) // login/sign in
+            .httpBasic(withDefaults())
             .logout((logout) -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-//                .invalidateHttpSession(true)
-            ) // logout/sign out
-            .rememberMe((remember) -> remember
-                .rememberMeServices(rememberMeServices))
+                    .logoutUrl("/logout")
+//                    .logoutSuccessUrl("/")
+//                    .invalidateHttpSession(true)
+                    .permitAll()) // logout/sign out
+//            .rememberMe((remember) -> remember
+//                .rememberMeServices(rememberMeServices))
     ;
 
     return http.build();
@@ -71,29 +76,29 @@ public class WebSecurityConfigure {
   @Order(2)
   public SecurityFilterChain csrfFilterChain(HttpSecurity http) throws Exception {
     http
-        .csrf(csrf -> {
-          csrf
-//                  .ignoringRequestMatchers("/token")
-                  .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // CSRF token with cookie
-          ;
-        })
-//        .csrf().disable() // CSRF disable
+//        .csrf(csrf -> {
+//          csrf
+////                  .ignoringRequestMatchers("/token")
+//                  .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // CSRF token with cookie
+//          ;
+//        })
+        .csrf().disable() // CSRF disable
     ;
     return http.build();
   }
 
-  @Bean
-  @Order(3)
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-            .securityContext((securityContext) -> securityContext
-            .securityContextRepository(new RequestAttributeSecurityContextRepository()))
-            .sessionManagement(session -> session
-                    .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
-            ;
-
-    return http.build();
-  }
+//  @Bean
+//  @Order(3)
+//  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//    http
+//            .securityContext((securityContext) -> securityContext
+//            .securityContextRepository(new RequestAttributeSecurityContextRepository()))
+//            .sessionManagement(session -> session
+//                    .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+//            ;
+//
+//    return http.build();
+//  }
 
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -103,7 +108,7 @@ public class WebSecurityConfigure {
   @Bean
   public RememberMeServices rememberMeServices(UserDetailsService userDetailsService) {
     TokenBasedRememberMeServices.RememberMeTokenAlgorithm encodingAlgorithm = TokenBasedRememberMeServices.RememberMeTokenAlgorithm.SHA256;
-    TokenBasedRememberMeServices rememberMe = new TokenBasedRememberMeServices("spring", userDetailsService, encodingAlgorithm);
+    TokenBasedRememberMeServices rememberMe = new TokenBasedRememberMeServices("wagashi-spring-boot", userDetailsService, encodingAlgorithm);
     rememberMe.setMatchingAlgorithm(TokenBasedRememberMeServices.RememberMeTokenAlgorithm.MD5);
     return rememberMe;
   }
