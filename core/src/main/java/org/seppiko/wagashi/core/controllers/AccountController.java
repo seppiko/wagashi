@@ -5,7 +5,6 @@ import org.seppiko.wagashi.commons.utils.JsonUtil;
 import org.seppiko.wagashi.commons.utils.JwtUtil;
 import org.seppiko.wagashi.core.models.ResponseMessageEntity;
 import org.seppiko.wagashi.core.models.ResponseTokenEntity;
-import org.seppiko.wagashi.core.services.UserPrincipal;
 import org.seppiko.wagashi.core.services.UserService;
 import org.seppiko.wagashi.core.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -34,7 +34,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.ArrayList;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * Spring boot security config
@@ -56,13 +55,12 @@ public class WebSecurityConfigure {
     http.authorizeHttpRequests((requests) -> requests
                     .requestMatchers(antRequestMatcherList.toArray(AntPathRequestMatcher[]::new)).permitAll()
                     .anyRequest().authenticated())
-//            .formLogin((form) -> form
-//                    .loginPage("/login")
-//                    .permitAll()) // login/sign in
-            .httpBasic(withDefaults())
+            .formLogin((form) -> form
+                    .loginPage("/login")
+                    .permitAll()) // login/sign in
             .logout((logout) -> logout
                     .logoutUrl("/logout")
-//                    .logoutSuccessUrl("/")
+                    .logoutSuccessUrl("/")
 //                    .invalidateHttpSession(true)
                     .permitAll()) // logout/sign out
 //            .rememberMe((remember) -> remember
@@ -105,10 +103,12 @@ public class WebSecurityConfigure {
     return new BCryptPasswordEncoder();
   }
 
+  private final String REMEMBER_ME_KEY = "wagashi-spring-boot";
+
   @Bean
   public RememberMeServices rememberMeServices(UserDetailsService userDetailsService) {
     TokenBasedRememberMeServices.RememberMeTokenAlgorithm encodingAlgorithm = TokenBasedRememberMeServices.RememberMeTokenAlgorithm.SHA256;
-    TokenBasedRememberMeServices rememberMe = new TokenBasedRememberMeServices("wagashi-spring-boot", userDetailsService, encodingAlgorithm);
+    TokenBasedRememberMeServices rememberMe = new TokenBasedRememberMeServices(REMEMBER_ME_KEY, userDetailsService, encodingAlgorithm);
     rememberMe.setMatchingAlgorithm(TokenBasedRememberMeServices.RememberMeTokenAlgorithm.MD5);
     return rememberMe;
   }
